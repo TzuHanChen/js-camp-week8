@@ -24,6 +24,7 @@ API_KEY=your-admin-token
 ```
 
 如果還未註冊學院的 [LiveJS 電商 API](https://hexschool.github.io/hexschoolliveswagger/)：
+
 1. 請進入到[此網站](https://livejs-api.hexschool.io/)，並點選「註冊」，註冊帳號成功後，登入到網站
 2. 登入後即可進入到 API 申請畫面，請依照說明建立 API Path，也可以取得 API Key
 
@@ -32,7 +33,7 @@ API_KEY=your-admin-token
 依序開啟以下檔案，按照註解提示完成所有函式：
 
 | 檔案 | 說明 |
-|------|------|
+| - | - |
 | `api.js` | API 相關函式 |
 | `utils.js` | 工具函式 |
 | `services/productService.js` | 產品服務 |
@@ -74,7 +75,7 @@ js-camp-week8/
 本週作業分為五個任務，請依照說明，完成對應的功能要求：
 
 | 任務 | 檔案 |
-|------|------|
+| - | - |
 | 任務一 | `api.js` |
 | 任務二 | `utils.js` |
 | 任務三 | `services/productService.js` |
@@ -157,7 +158,7 @@ js-camp-week8/
 ### 測試項目（共 75 項）
 
 | 群組 | 測試數量 |
-|----------|---------|
+| - | - |
 | 測試一：API 模組 | 13 項 |
 | 測試二：工具函式 | 33 項 |
 | 測試三：產品服務 | 9 項 |
@@ -183,4 +184,3 @@ js-camp-week8/
 2. 確認網路連線正常
 3. 檢查各函式是否有正確回傳值
 4. 確認 async/await 語法正確使用
-
