@@ -3,7 +3,7 @@
 // ========================================
 
 const axios = require('axios');
-const { API_PATH, BASE_URL, ADMIN_TOKEN } = require('./config');
+const { customerRequest, adminRequest } = require('./config');
 
 // ========== 客戶端 API ==========
 
@@ -14,6 +14,12 @@ const { API_PATH, BASE_URL, ADMIN_TOKEN } = require('./config');
 async function fetchProducts() {
   // 請實作此函式
   // 回傳 response.data.products
+  try {
+    const data = await customerRequest.get('/products');
+    return data.products;
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -22,6 +28,12 @@ async function fetchProducts() {
  */
 async function fetchCart() {
   // 請實作此函式
+  try {
+    const data = await customerRequest.get('/carts');
+    return { carts: data.carts, total: data.total, finalTotal: data.finalTotal };
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -32,6 +44,14 @@ async function fetchCart() {
  */
 async function addToCart(productId, quantity) {
   // 請實作此函式
+  try {
+    const data = await customerRequest.post('/carts', {
+      data: { productId, quantity }
+    });
+    return { carts: data.carts, total: data.total, finalTotal: data.finalTotal };
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -42,6 +62,14 @@ async function addToCart(productId, quantity) {
  */
 async function updateCartItem(cartId, quantity) {
   // 請實作此函式
+  try {
+    const data = await customerRequest.patch('/carts', {
+      data: { id: cartId, quantity }
+    });
+    return { carts: data.carts, total: data.total, finalTotal: data.finalTotal };
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -51,6 +79,12 @@ async function updateCartItem(cartId, quantity) {
  */
 async function deleteCartItem(cartId) {
   // 請實作此函式
+  try {
+    const data = await customerRequest.delete(`/carts/${cartId}`);
+    return { carts: data.carts, total: data.total, finalTotal: data.finalTotal };
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -59,6 +93,12 @@ async function deleteCartItem(cartId) {
  */
 async function clearCart() {
   // 請實作此函式
+  try {
+    const data = await customerRequest.delete('/carts');
+    return { carts: data.carts, total: data.total, finalTotal: data.finalTotal };
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -68,6 +108,14 @@ async function clearCart() {
  */
 async function createOrder(userInfo) {
   // 請實作此函式
+  try {
+    const data = await customerRequest.post('/orders', {
+      data: { userInfo }
+    });
+    return data;
+  } catch (error) {
+    return error;
+  }
 }
 
 // ========== 管理員 API ==========
@@ -86,6 +134,12 @@ async function createOrder(userInfo) {
  */
 async function fetchOrders() {
   // 請實作此函式
+  try {
+    const data = await adminRequest.get('/orders');
+    return data.orders;
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -96,6 +150,14 @@ async function fetchOrders() {
  */
 async function updateOrderStatus(orderId, isPaid) {
   // 請實作此函式
+  try {
+    const data = await adminRequest.put('/orders', {
+      data: { id: orderId, paid: isPaid }
+    });
+    return data;
+  } catch (error) {
+    return error;
+  }
 }
 
 /**
@@ -105,6 +167,12 @@ async function updateOrderStatus(orderId, isPaid) {
  */
 async function deleteOrder(orderId) {
   // 請實作此函式
+  try {
+    const data = await adminRequest.delete(`/orders/${orderId}`);
+    return data;
+  } catch (error) {
+    return error;
+  }
 }
 
 module.exports = {
