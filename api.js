@@ -110,7 +110,7 @@ async function createOrder(userInfo) {
   // 請實作此函式
   try {
     const data = await customerRequest.post('/orders', {
-      data: { userInfo }
+      data: { user: userInfo }
     });
     return data;
   } catch (error) {
