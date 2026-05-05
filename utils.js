@@ -11,6 +11,8 @@ const dayjs = require('dayjs');
  */
 function getDiscountRate(product) {
   // 請實作此函式
+  const discount = Math.round(product.price / product.origin_price * 10);
+  return `${discount}折`;
 }
 
 /**
@@ -20,6 +22,7 @@ function getDiscountRate(product) {
  */
 function getAllCategories(products) {
   // 請實作此函式
+  return [... new Set(products.map(product => product.category))];
 }
 
 /**
@@ -30,6 +33,7 @@ function getAllCategories(products) {
 function formatDate(timestamp) {
   // 請實作此函式
   // 提示：dayjs.unix...
+  return dayjs.unix(timestamp).format('YYYY/MM/DD HH:mm');
 }
 
 /**
@@ -43,6 +47,10 @@ function getDaysAgo(timestamp) {
   // 1. 用 dayjs() 取得今天
   // 2. 用 dayjs.unix(timestamp) 取得日期
   // 3. 用 .diff() 計算天數差異
+  const today = dayjs();
+  const daysAgo = dayjs.unix(timestamp);
+  const diff = today.diff(daysAgo, 'day');
+  return diff > 1 ? `${diff} 天前` : '今天';
 }
 
 /**
@@ -59,6 +67,23 @@ function getDaysAgo(timestamp) {
  */
 function validateOrderUser(data) {
   // 請實作此函式
+  const errors = [];
+  if (!data.name || data.name.trim() === '') {
+    errors.push('name: 不可為空');
+  }
+  if (!data.tel || !/^09\d{8}$/.test(data.tel)) {
+    errors.push('tel: 必須是 09 開頭的 10 位數字');
+  }
+  if (!data.email || !data.email.includes('@')) {
+    errors.push('email: 必須包含 @ 符號');
+  }
+  if (!data.address || data.address.trim() === '') {
+    errors.push('address: 不可為空');
+  }
+  if (!data.payment || !['ATM', 'Credit Card', 'Apple Pay'].includes(data.payment)) {
+    errors.push("payment: 必須是 'ATM', 'Credit Card', 'Apple Pay' 其中之一");
+  }
+  return { isValid: errors.length === 0, errors };
 }
 
 /**
@@ -73,6 +98,10 @@ function validateOrderUser(data) {
  */
 function validateCartQuantity(quantity) {
   // 請實作此函式
+  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+    return { isValid: false, error: '數量必須是 1~99 的正整數' };
+  }
+  return { isValid: true };
 }
 
 /**
@@ -92,6 +121,7 @@ function validateCartQuantity(quantity) {
  */
 function formatCurrency(amount) {
   // 請實作此函式
+  return `NT$ ${amount.toLocaleString('zh-TW')}`;
 }
 
 module.exports = {
